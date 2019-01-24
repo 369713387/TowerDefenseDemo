@@ -4,27 +4,32 @@ using UnityEngine;
 
 public class Enemy4 : Enemy
 {
+    private void Start()
+    {
+        killed_coins = 40;
+    }
+
     /// <summary>
     /// 火防御力
     /// </summary>
     [SerializeField]
     protected float fire_def;
 
-    public override void OnTriggerEnter2D(Collider2D collision)
+    /// <summary>
+    /// 具有火属性防御的敌人
+    /// </summary>
+    /// <returns></returns>
+    public override float GetTotalDef(ElementType type)
     {
-        //敌人被子弹击中
-        string tag = collision.tag.ToString();
-        switch (tag)
+        if(type == ElementType.Fire)
         {
-            case "FireProjectile":
-                FireProjectile fireProjectile = collision.GetComponent<FireProjectile>();
-                hpBar.Hp_now -= fireProjectile.Attack - def - fire_def;
-                Debug.Log(string.Format("伤害 ：{0}", fireProjectile.Attack - def - fire_def));
-
-                fireProjectile.Release();
-                break;
-            default:
-                break;
+            Debug.Log("具有火属性防御的敌人" + gameObject.name);
+            return def + fire_def;
         }
-    }
+        else
+        {
+            return def;
+        }
+        
+    }   
 }

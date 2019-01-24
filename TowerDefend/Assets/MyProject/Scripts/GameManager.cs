@@ -27,7 +27,15 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            return wave_EnemyNum != PlayerData.Instance.wave;
+            if(wave_EnemyNum == PlayerData.Instance.wave)
+            {
+                return Active_enemies.Count > 0;
+            }
+            else
+            {
+                return true;
+            }
+            
         }
     }
 
@@ -121,7 +129,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < PlayerData.Instance.wave; i++)
         {
             Enemy tempEnemy = null;
-            int randomIndex = Random.Range(0, 4);
+            int randomIndex = Random.Range(0, pool.objectsPrefab.Length);
             string enemyName = string.Empty;
             switch (randomIndex)
             {
@@ -145,6 +153,11 @@ public class GameManager : MonoBehaviour
                     //初始化敌人Obj
                     tempEnemy = pool.GetGameObject(enemyName).GetComponent<Enemy4>();
                     break;
+                case 4:
+                    enemyName = "Enemy5";
+                    //初始化敌人Obj
+                    tempEnemy = pool.GetGameObject(enemyName).GetComponent<Enemy5>();
+                    break;
                 default:
                     break;
             }
@@ -153,9 +166,10 @@ public class GameManager : MonoBehaviour
             tempEnemy.transform.position = LevelManager.Instance.startPortal.transform.position + Vector3.down * 0.5f;
             //记录当前存活的Enemy
             Active_enemies.Add(tempEnemy);
+            //Debug.Log("生成敌人，当前存活敌人数量 ： " + Active_enemies.Count);
             //记录当前生成的敌人数量
             wave_EnemyNum++;
-            Debug.Log(wave_EnemyNum);
+            //Debug.Log(wave_EnemyNum);
             yield return new WaitForSeconds(2f);
         }        
     }
@@ -167,6 +181,7 @@ public class GameManager : MonoBehaviour
     public void RemoveEnemy(Enemy enemy)
     {
         Active_enemies.Remove(enemy);
+        //Debug.Log("销毁敌人，当前存活敌人数量 ： " + Active_enemies.Count);
     }
 
     /// <summary>

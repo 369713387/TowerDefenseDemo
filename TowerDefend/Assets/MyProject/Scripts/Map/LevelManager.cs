@@ -162,7 +162,7 @@ public class LevelManager : MonoBehaviour
             //产生敌人出生点和目的点
             SpawnPortal();
         }
-        print(lastTile.WorldPosition);
+        //print(lastTile.WorldPosition);
 
     }
 

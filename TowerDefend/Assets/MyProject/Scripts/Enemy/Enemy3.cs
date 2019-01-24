@@ -4,22 +4,8 @@ using UnityEngine;
 
 public class Enemy3 : Enemy
 {
-
-    public override void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        //敌人被子弹击中
-        string tag = collision.tag.ToString();
-        switch (tag)
-        {
-            case "FireProjectile":
-                FireProjectile fireProjectile = collision.GetComponent<FireProjectile>();
-                hpBar.Hp_now -= fireProjectile.Attack - def;
-                Debug.Log(string.Format("伤害 ：{0}", fireProjectile.Attack - def));
-
-                fireProjectile.Release();
-                break;
-            default:
-                break;
-        }
+        killed_coins = 30;
     }
 }

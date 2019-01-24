@@ -77,7 +77,7 @@ public class TileScript : MonoBehaviour {
                 if (Input.GetMouseButtonDown(0))
                 {
                     PlacePrefab();
-                    Debug.Log("X : " + GridPosition.X + " Y : " + GridPosition.Y);
+                    //Debug.Log("X : " + GridPosition.X + " Y : " + GridPosition.Y);
                 }
             }
             else
@@ -125,7 +125,7 @@ public class TileScript : MonoBehaviour {
             isEmpty = false;
             //放置塔后不可走
             WalkAble = false;
-            Debug.Log("PlacePrefab");
+            //Debug.Log("PlacePrefab");
         }        
     }
 }
